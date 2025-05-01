@@ -28,11 +28,12 @@
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition Width="0.2cm"/>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="1 - Select device:"
 					   VerticalAlignment="Center"/>
-			<ComboBox Grid.Column="1" ItemsSource="{Binding Devices}"
+			<ComboBox Grid.Column="2" ItemsSource="{Binding Devices}"
 					  SelectedItem="{Binding SelectedDevice}">
 				<ComboBox.ItemTemplate>
 					<DataTemplate DataType="{x:Type naps2_scan:ScanDevice}">
