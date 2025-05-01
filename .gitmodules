@@ -1,0 +1,4 @@
+[submodule "SubModules/wpfgui"]
+	path = SubModules/wpfgui
+	url = git@github.com:dgsfg88/wpfgui.git
+	branch = main
