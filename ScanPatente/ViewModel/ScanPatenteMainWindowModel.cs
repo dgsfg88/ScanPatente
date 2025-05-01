@@ -74,7 +74,7 @@ namespace ScanPatente.ViewModel
 				Device = SelectedDevice,
 				PaperSource = PaperSource.Auto,
 				PageSize = PageSize.A4,
-				Dpi = 100
+				Dpi = 200
 			};
 
 			try
