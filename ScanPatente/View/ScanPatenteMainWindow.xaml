@@ -4,9 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScanPatente.View"
+		xmlns:vm="clr-namespace:ScanPatente.ViewModel"
+		xmlns:naps2_scan="clr-namespace:NAPS2.Scan;assembly=NAPS2.Sdk"
+		xmlns:wpfgui="clr-namespace:wpfgui.Views;assembly=aisoftware.wpfgui"
         mc:Ignorable="d"
         Title="ScanPatente" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+	<Window.DataContext>
+		<vm:ScanPatenteMainWindowModel/>
+	</Window.DataContext>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="1.5*"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<wpfgui:AIImageViewer/>
+
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+				<RowDefinition Height="auto"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock Text="1 - Select device:"
+					   VerticalAlignment="Center"/>
+			<ComboBox Grid.Column="1" ItemsSource="{Binding Devices}"
+					  SelectedItem="{Binding SelectedDevice}">
+				<ComboBox.ItemTemplate>
+					<DataTemplate DataType="{x:Type naps2_scan:ScanDevice}">
+						<TextBlock Text="{Binding Name}"/>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+		</Grid>
+	</Grid>
 </Window>

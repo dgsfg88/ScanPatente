@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NAPS2.Scan;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,12 @@ namespace ScanPatente.View
 		public ScanPatenteMainWindow()
 		{
 			InitializeComponent();
+		}
+
+		protected override void OnClosed(EventArgs e)
+		{
+			if (DataContext is IDisposable dataContext)
+				dataContext.Dispose();
 		}
 	}
 }
