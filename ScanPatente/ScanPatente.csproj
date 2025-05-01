@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="NAPS2.Images.Wpf" Version="1.1.6" />
     <PackageReference Include="NAPS2.Sdk" Version="1.1.6" />
   </ItemGroup>
