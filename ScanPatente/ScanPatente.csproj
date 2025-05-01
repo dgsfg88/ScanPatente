@@ -13,4 +13,8 @@
     <PackageReference Include="NAPS2.Sdk" Version="1.1.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SubModules\wpfgui\source\wpfgui.csproj" />
+  </ItemGroup>
+
 </Project>
