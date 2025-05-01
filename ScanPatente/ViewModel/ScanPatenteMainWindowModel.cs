@@ -1,4 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using NAPS2.Images;
+using NAPS2.Images.Wpf;
 using NAPS2.Scan;
 using System;
 using System.Collections.Generic;
@@ -6,6 +9,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace ScanPatente.ViewModel
 {
@@ -15,6 +20,10 @@ namespace ScanPatente.ViewModel
 		private ObservableCollection<ScanDevice> devices = new ObservableCollection<ScanDevice>();
 		[ObservableProperty]
 		private ScanDevice? selectedDevice = default;
+		[ObservableProperty]
+		private bool isUIEnabled = true;
+		[ObservableProperty]
+		private BitmapSource? imageToShow = null;
 		private ScanningContext scanningContext;
 		private ScanController controller;
 		private CancellationTokenSource devicesUpdateCancellationToken;
@@ -53,6 +62,39 @@ namespace ScanPatente.ViewModel
 				}
 
 				await Task.Delay(interval, cancellationToken);
+			}
+		}
+
+		[RelayCommand]
+		protected async Task Scan()
+		{
+			// Set scanning options
+			var options = new ScanOptions
+			{
+				Device = SelectedDevice,
+				PaperSource = PaperSource.Auto,
+				PageSize = PageSize.A4,
+				Dpi = 100
+			};
+
+			try
+			{
+				IsUIEnabled = false;
+
+				await foreach (var image in controller.Scan(options))
+				{
+					//La writeableBitmap viene inizializzata nel thread della scansione, quindi
+					//	è necessario copiarla perché non possiede un dispatcher
+					ImageToShow = new WriteableBitmap(((WpfImage)image.Storage).Bitmap);
+				}
+			}
+			catch (Exception ex)
+			{
+				//TODO
+			}
+			finally
+			{
+				IsUIEnabled = true;
 			}
 		}
 
